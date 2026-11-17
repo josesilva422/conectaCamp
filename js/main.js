@@ -253,7 +253,7 @@
     if (!canApi) return Promise.resolve(null);
     var ctl = window.AbortController ? new AbortController() : null;
     var t = setTimeout(function () { if (ctl) ctl.abort(); }, timeoutMs || 2500);
-    return fetch('/api/status', { headers: { 'Accept': 'application/json' }, cache: 'no-store', signal: ctl ? ctl.signal : undefined })
+    return window.ccFetch('/api/status', { headers: { 'Accept': 'application/json' }, cache: 'no-store', signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json().catch(function () { return null; }) : null; })
       .then(function (s) { clearTimeout(t); if (s && typeof s.capacity === 'number') { noServer = false; return s; } noServer = true; return null; })
       .catch(function () { clearTimeout(t); return null; });
@@ -453,7 +453,7 @@
       authAck: $('#authAck').checked, agree: $('#agree').checked, imgAck: $('#imgAck').checked, payPlan: selectedPlan(),
       hp: ($('#hp') || {}).value || ''
     };
-    fetch('/api/registrations', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+    window.ccFetch('/api/registrations', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
       .then(function (res) { return res.json().catch(function () { return null; }).then(function (data) { return { res: res, data: data }; }); })
       .then(function (o) {
         if (o.res.ok && o.data && o.data.protocol) { showSuccess(o.data.protocol, true); fetchStatus().then(function (s) { if (s) applyStatus(s); }); }

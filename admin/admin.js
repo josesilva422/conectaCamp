@@ -50,7 +50,7 @@
     clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 3800);
   }
   function api(method, url, body) {
-    return fetch(url, { method: method, headers: body ? { 'Content-Type': 'application/json' } : undefined, body: body ? JSON.stringify(body) : undefined, credentials: 'same-origin', cache: 'no-store' }).then(function (res) {
+    return window.ccFetch(url, { method: method, headers: body ? { 'Content-Type': 'application/json' } : undefined, body: body ? JSON.stringify(body) : undefined, credentials: 'same-origin', cache: 'no-store' }).then(function (res) {
       return res.json().catch(function () { return null; }).then(function (data) {
         if (res.status === 401 && url !== '/api/admin/login') { showLogin(); var e1 = new Error('Sessão expirada. Entre novamente.'); e1.status = 401; throw e1; }
         if (!res.ok) { var e2 = new Error((data && data.error) || 'Algo deu errado.'); e2.status = res.status; e2.data = data; throw e2; }
@@ -61,7 +61,14 @@
 
   /* ---------- login / sessão ---------- */
   function closeAll() { ['dlgDetail', 'dlgNew', 'dlgSettings', 'dlgCheck'].forEach(function (id) { var d = $('#' + id); if (d.open) d.close(); }); }
-  function showLogin() { $('#app').hidden = true; $('#login').hidden = false; closeAll(); setTimeout(function () { $('#pw').focus(); }, 0); }
+  /* Com o Supabase o login é por e-mail e senha; com o servidor local, só a senha */
+  var sbMode = window.CCBackend && window.CCBackend.mode === 'supabase';
+  if (sbMode) {
+    $('#emailRow').hidden = false;
+    var savedEmail = ''; try { savedEmail = localStorage.getItem('cc_admin_email') || ''; } catch (e) { /* sem storage */ }
+    $('#email').value = savedEmail || window.CCBackend.adminEmail || '';
+  }
+  function showLogin() { $('#app').hidden = true; $('#login').hidden = false; closeAll(); setTimeout(function () { (sbMode && !$('#email').value ? $('#email') : $('#pw')).focus(); }, 0); }
   function showApp() { $('#login').hidden = true; $('#app').hidden = false; }
   function load() {
     return api('GET', '/api/admin/data').then(function (d) {
@@ -73,9 +80,16 @@
   $('#loginForm').addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = e.target.querySelector('button'); btn.disabled = true; $('#loginErr').textContent = '';
-    api('POST', '/api/admin/login', { password: $('#pw').value }).then(function () { $('#pw').value = ''; return load(); })
+    api('POST', '/api/admin/login', { password: $('#pw').value, email: sbMode ? $('#email').value : undefined })
+      .then(function () { $('#pw').value = ''; if (sbMode) { try { localStorage.setItem('cc_admin_email', $('#email').value.trim().toLowerCase()); } catch (e) { /* sem storage */ } } return load(); })
       .catch(function (err) { $('#loginErr').textContent = err.message; })
       .then(function () { btn.disabled = false; });
+  });
+  /* Exportar CSV: com o Supabase o arquivo é montado aqui no navegador */
+  $('#btnCsv').addEventListener('click', function (e) {
+    if (!sbMode) return;
+    e.preventDefault();
+    window.CCBackend.downloadCsv().catch(function (err) { toast(err.message || 'Não foi possível exportar.', true); });
   });
   $('#btnLogout').addEventListener('click', function () { api('POST', '/api/admin/logout').catch(function () {}).then(showLogin); });
 

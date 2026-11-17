@@ -1,0 +1,49 @@
+# CONECTAcamp — hospedagem estática no Netlify (os dados ficam no Supabase)
+# Não há build: o Netlify publica a pasta do projeto como ela está.
+# Na tela de importação deixe "Build command" e "Publish directory" VAZIOS.
+# Nenhuma variável de ambiente é necessária (a URL e a chave pública do Supabase ficam em js/config.js).
+
+[build]
+  publish = "."
+
+# Arquivos do projeto que não fazem parte do site: ficam fora do ar
+[[redirects]]
+  from = "/server.js"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/supabase/*"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/data/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "same-origin"
+
+# Painel do organizador: política de segurança estrita (só o próprio site e o Supabase deste projeto)
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://eeawljyvmltvccmqfghs.supabase.co; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+    X-Frame-Options = "DENY"
+    Cache-Control = "no-store"
+    X-Robots-Tag = "noindex, nofollow"

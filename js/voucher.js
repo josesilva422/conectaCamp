@@ -56,7 +56,7 @@
     }
     if (location.protocol === 'file:') { err.textContent = 'A consulta só funciona com o site no ar.'; return; }
     go.disabled = true; err.textContent = '';
-    fetch('/api/voucher', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ q: value }) })
+    window.ccFetch('/api/voucher', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ q: value }) })
       .then(function (res) { return res.json().catch(function () { return null; }).then(function (data) { return { res: res, data: data }; }); })
       .then(function (o) {
         if (o.res.ok && o.data && o.data.vouchers) render(o.data);
@@ -190,7 +190,7 @@
       scraps(art, stub, vertical());
       move('85%', 14); stub.style.opacity = '0';
       var t0 = Date.now();
-      fetch('/api/voucher/checkin', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: v.code }) })
+      window.ccFetch('/api/voucher/checkin', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: v.code }) })
         .then(function (res) { return res.json().catch(function () { return null; }).then(function (data) { return { res: res, data: data }; }); })
         .then(function (o) {
           if (o.res.ok && o.data && o.data.at) setTimeout(function () { done(o.data.at); }, Math.max(0, 600 - (Date.now() - t0)));

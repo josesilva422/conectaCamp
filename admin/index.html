@@ -18,6 +18,10 @@
   <form id="loginForm" class="login-card">
     <p class="brand">CONECTA<b>camp</b></p>
     <h1>Painel do organizador</h1>
+    <div id="emailRow" hidden>
+      <label for="email">E-mail</label>
+      <input id="email" type="email" autocomplete="username" spellcheck="false">
+    </div>
     <label for="pw">Senha</label>
     <input id="pw" type="password" autocomplete="current-password" required autofocus>
     <p class="err" id="loginErr" role="alert"></p>
@@ -33,7 +37,7 @@
       <nav class="top-actions" aria-label="Ações">
         <button class="btn btn-o" id="btnCheck" type="button">Validar voucher</button>
         <button class="btn btn-o" id="btnNew" type="button">+ Nova inscrição</button>
-        <a class="btn btn-w" href="/api/admin/export.csv">Exportar CSV</a>
+        <a class="btn btn-w" id="btnCsv" href="/api/admin/export.csv">Exportar CSV</a>
         <button class="btn btn-w" id="btnPrint" type="button">Lista de presença</button>
         <button class="btn btn-w" id="btnSettings" type="button">Configurações</button>
         <button class="btn btn-w" id="btnLogout" type="button">Sair</button>
@@ -144,6 +148,8 @@
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 <section id="printSheet" class="print-sheet" aria-hidden="true"></section>
 
+<script src="../js/config.js"></script>
+<script src="../js/backend.js"></script>
 <script src="admin.js"></script>
 </body>
 </html>

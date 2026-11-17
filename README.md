@@ -63,20 +63,33 @@ Em **`data/`** (não é servida pelo site):
 
 Faça backup da pasta `data/` e **não a publique**. Ela contém dados pessoais, inclusive de menores (LGPD).
 
-## Banco no Supabase (preparado, ainda NÃO conectado)
-O arquivo [`supabase/schema.sql`](supabase/schema.sql) já tem o banco pronto: tabelas, segurança por linha (RLS),
-vagas ao vivo, inscrição pelo site, e as funções do painel. Ele existe só aqui na pasta; **nada foi criado no Supabase**.
-Foi testado em um Postgres local (45 verificações: quem pode ver o quê, limite de vagas, erros, cancelar/reativar, anti-abuso).
+## Banco no Supabase
+O site e o painel falam com o Supabase quando estão **publicados** (Netlify ou domínio próprio) e com o servidor local
+(`node server.js`) quando abertos em `localhost`. A escolha é automática, feita por [`js/backend.js`](js/backend.js)
+a partir de [`js/config.js`](js/config.js) (URL do projeto e chave `sb_publishable_...`, que é pública por natureza;
+**nunca** coloque a chave `secret`/`service_role` ali). Para forçar um modo no navegador:
+`localStorage.setItem('cc_backend', 'supabase')` ou `'local'`.
 
-Quando você criar o projeto:
-1. Supabase > SQL Editor > cole o `schema.sql` inteiro e rode.
-2. Authentication > Users > Add user, com o e-mail do organizador (marque "Auto confirm user").
-3. Authentication > Sign In / Providers: desative "Allow new users to sign up".
-4. Me passe a **URL do projeto** e a **chave pública** (`sb_publishable_...`) para ligar o site e o painel a esse banco.
+O arquivo [`supabase/schema.sql`](supabase/schema.sql) cria o banco inteiro: tabelas, segurança por linha (RLS), vagas ao vivo,
+inscrição pelo site (com CPF), voucher por pessoa, consulta pública do voucher, entrada pelo celular e as funções do painel.
+Foi testado em um Postgres local com os papéis do Supabase simulados (138 verificações: quem pode ver o quê, limites de vagas
+e de tentativas, CPF, vouchers, entrada, migração de um banco que já tinha inscrições) e, de ponta a ponta, com o site e o painel
+reais contra um simulador da API do Supabase.
 
-**Atenção:** o `schema.sql` ainda **não** tem CPF, voucher por pessoa nem registro de entrada (isso foi feito só no servidor local). Antes de ligar ao Supabase é preciso atualizar o schema com `cpf`, `voucher`, `checkin` em `participants` e as funções de consulta e de entrada.
+**Passo a passo (uma vez):**
+1. Supabase > **SQL Editor** > New query > cole o `schema.sql` inteiro e **Run**. É seguro rodar de novo (inclusive depois de atualizações).
+2. **Authentication > Users > Add user**: crie o usuário do organizador (e-mail abaixo, com senha; marque "Auto confirm user").
+   Só e-mails listados na tabela `admins` do schema entram no painel (por padrão, `josegabrielpo422@gmail.com`; para outro, troque no schema).
+3. **Authentication > Sign In / Providers**: desative "Allow new users to sign up".
+4. **Authentication > URL Configuration**: depois do primeiro deploy, coloque o endereço do site (ex.: `https://algo.netlify.app`) em *Site URL*.
+5. Abra `/admin/` do site publicado e entre com **e-mail e senha** (com o servidor local, o painel pede só a senha).
 
-Enquanto isso, o site e o painel continuam usando o servidor local (`node server.js`) com os dados em `data/`.
+**O que protege os dados:** o público (visitante do site) não lê tabela nenhuma; só chama 4 funções (`camp_status`, `camp_register`,
+`camp_voucher_lookup`, `camp_voucher_checkin`), que têm limite de tentativas por IP e devolvem só o necessário (nunca telefone,
+alergias nem o CPF inteiro). Todo o resto exige login de administrador (RLS). O plano gratuito do Supabase **pausa o projeto após
+7 dias sem uso**: entre no painel do Supabase e clique em "Restore" se isso acontecer.
+
+Os dados do servidor local (`data/`) e os do Supabase são **separados**: o que foi cadastrado localmente não aparece no Supabase.
 
 ## Segurança (resumo)
 - Painel e API do painel só respondem com login (cookie `HttpOnly`, `SameSite=Strict`, expira em 12 h); limite de tentativas de senha.
@@ -85,9 +98,13 @@ Enquanto isso, o site e o painel continuam usando o servidor local (`node server
 - Por padrão escuta só em `127.0.0.1`. Para expor na rede/internet use um HTTPS na frente (proxy) e defina `HOST=0.0.0.0` e, se houver proxy, `TRUST_PROXY=1`.
 
 ## Publicar
-O painel precisa de um servidor Node com disco persistente (Netlify estático **não** serve para isso).
-Qualquer VPS, Render, Railway ou Fly.io com volume para a pasta `data/` funciona: comando de início `node server.js`,
-variável `ADMIN_PASSWORD` definida e HTTPS ligado.
+**Netlify + Supabase (recomendado):** importe o repositório e deixe **Build command** e **Publish directory** vazios; não há
+variáveis de ambiente. O [`netlify.toml`](netlify.toml) já tira do ar os arquivos que não são do site (`server.js`, `supabase/`, `README.md`)
+e aplica uma política de segurança estrita no `/admin/`. Siga o passo a passo do Supabase acima.
+
+**Alternativa sem Supabase:** um servidor Node com disco persistente (VPS, Render, Railway ou Fly.io com volume para `data/`):
+comando de início `node server.js`, variável `ADMIN_PASSWORD` definida e HTTPS ligado. Nesse caso, em `js/config.js`
+deixe `url` e `key` vazios para o site usar sempre o servidor.
 
 ## Editar o conteúdo
 Tudo que muda de uma edição para outra está em **`js/content.js`**: data, local, link do mapa, WhatsApp, Instagram,
