@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel · CONECTAcamp</title>
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<main id="login" class="login" hidden>
+  <form id="loginForm" class="login-card">
+    <p class="brand">CONECTA<b>camp</b></p>
+    <h1>Painel do organizador</h1>
+    <label for="pw">Senha</label>
+    <input id="pw" type="password" autocomplete="current-password" required autofocus>
+    <p class="err" id="loginErr" role="alert"></p>
+    <button class="btn" type="submit">Entrar</button>
+  </form>
+</main>
+
+<!-- APP -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="top-in">
+      <p class="brand">CONECTA<b>camp</b> <span class="badge-adm">Painel</span></p>
+      <nav class="top-actions" aria-label="Ações">
+        <button class="btn btn-o" id="btnCheck" type="button">Validar voucher</button>
+        <button class="btn btn-o" id="btnNew" type="button">+ Nova inscrição</button>
+        <a class="btn btn-w" href="/api/admin/export.csv">Exportar CSV</a>
+        <button class="btn btn-w" id="btnPrint" type="button">Lista de presença</button>
+        <button class="btn btn-w" id="btnSettings" type="button">Configurações</button>
+        <button class="btn btn-w" id="btnLogout" type="button">Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="stats" class="stats" aria-label="Resumo"></section>
+
+    <section class="toolbar" aria-label="Filtros">
+      <div class="field grow"><label for="q">Buscar</label><input id="q" type="search" placeholder="Nome, CPF, WhatsApp, igreja, protocolo ou voucher"></div>
+      <div class="field"><label for="fStatus">Situação</label>
+        <select id="fStatus">
+          <option value="todos">Todas</option>
+          <option value="pendente">Pendentes</option>
+          <option value="parcial">Pagamento parcial</option>
+          <option value="pago">Pagas</option>
+          <option value="cancelado">Canceladas</option>
+        </select>
+      </div>
+      <div class="field"><label for="fSort">Ordenar</label>
+        <select id="fSort">
+          <option value="recentes">Mais recentes</option>
+          <option value="antigas">Mais antigas</option>
+          <option value="nome">Nome (A–Z)</option>
+          <option value="valor">Maior valor</option>
+        </select>
+      </div>
+    </section>
+
+    <p id="count" class="count" role="status"></p>
+    <section id="list" class="list" aria-label="Inscrições"></section>
+  </main>
+</div>
+
+<!-- DETALHES -->
+<dialog id="dlgDetail" class="dlg"></dialog>
+
+<!-- VALIDAR VOUCHER (chegada) -->
+<dialog id="dlgCheck" class="dlg">
+  <div class="dlg-body">
+    <div class="dlg-head"><h2>Validar voucher</h2><button class="x" type="button" data-close aria-label="Fechar">×</button></div>
+    <p class="ck-count" id="ckCount" role="status"></p>
+    <form id="ckForm" class="ck-form">
+      <div class="field grow"><label for="ckQ">Código do voucher, CPF, protocolo ou nome</label><input id="ckQ" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Leia o QR ou digite aqui"></div>
+      <button class="btn btn-o" type="submit" id="ckGo">Buscar</button>
+      <button class="btn btn-w" type="button" id="ckScan">Ler QR com a câmera</button>
+    </form>
+    <div id="ckCam" class="ck-cam" hidden>
+      <video id="ckVideo" playsinline muted></video>
+      <p class="ck-cam-msg">Aponte a câmera para o QR do voucher</p>
+      <button class="btn btn-bad btn-sm" type="button" id="ckCamStop">Fechar câmera</button>
+    </div>
+    <p class="err" id="ckErr" role="alert"></p>
+    <div id="ckOut" class="ck-out"></div>
+    <p class="hint ck-tip">Dica: “Ler QR com a câmera” funciona no computador (webcam) e no celular. A câmera nativa do celular também serve: o QR abre este painel direto na pessoa (já logado). Leitores USB que leem QR funcionam com o cursor no campo acima.</p>
+  </div>
+</dialog>
+
+<!-- NOVA INSCRIÇÃO -->
+<dialog id="dlgNew" class="dlg">
+  <form id="newForm" method="dialog">
+    <div class="dlg-head"><h2>Nova inscrição</h2><button class="x" type="button" data-close aria-label="Fechar">×</button></div>
+    <p class="hint">Para quem se inscreveu por WhatsApp ou pessoalmente. A inscrição entra como “pendente”, a não ser que você registre um pagamento agora.</p>
+    <div id="newPeople"></div>
+    <button class="btn btn-w" id="newAdd" type="button">+ Adicionar participante</button>
+    <div class="field"><label for="newAcc">Se houver menores de 18 anos</label>
+      <select id="newAcc"><option value="sim">Vão com o responsável</option><option value="nao">Vão sem o responsável (autorização assinada)</option></select>
+    </div>
+    <div class="field"><label for="newPlan">Forma de pagamento escolhida</label>
+      <select id="newPlan">
+        <option value="">A definir</option>
+        <option value="pix">Pix (pagamento único)</option>
+        <option value="cartao">Cartão de crédito (pagamento único)</option>
+        <option value="crediario">Crediário (várias parcelas)</option>
+      </select>
+    </div>
+    <label class="check"><input type="checkbox" id="newPaidNow"><span>Registrar um pagamento agora</span></label>
+    <div id="newPayBox" class="grid2" hidden>
+      <div class="field"><label for="newPayAmount">Valor (R$)</label><input id="newPayAmount" type="number" min="0" step="0.01"></div>
+      <div class="field"><label for="newPayMethod">Forma</label><select id="newPayMethod"></select></div>
+    </div>
+    <div class="field"><label for="newNote">Observação do organizador</label><textarea id="newNote" rows="2" maxlength="2000"></textarea></div>
+    <p class="err" id="newErr" role="alert"></p>
+    <div class="dlg-foot"><button class="btn btn-w" type="button" data-close>Cancelar</button><button class="btn btn-o" type="submit">Salvar inscrição</button></div>
+  </form>
+</dialog>
+
+<!-- CONFIGURAÇÕES -->
+<dialog id="dlgSettings" class="dlg">
+  <form id="setForm" method="dialog">
+    <div class="dlg-head"><h2>Configurações</h2><button class="x" type="button" data-close aria-label="Fechar">×</button></div>
+    <div class="grid2">
+      <div class="field"><label for="setCap">Vagas (total)</label><input id="setCap" type="number" min="1" max="10000" required></div>
+      <div class="field"><label for="setPrice">Valor da inscrição (R$)</label><input id="setPrice" type="number" min="0" step="0.01" required></div>
+      <div class="field"><label for="setAgeMin">Idade mínima</label><input id="setAgeMin" type="number" min="0" max="99" required></div>
+      <div class="field"><label for="setAgeMax">Idade máxima</label><input id="setAgeMax" type="number" min="0" max="120" required></div>
+    </div>
+    <label class="check"><input type="checkbox" id="setPending"><span><b>Pré-cadastros ocupam vaga.</b> Desmarque para só contar quem já pagou alguma parcela.</span></label>
+    <label class="check"><input type="checkbox" id="setOpen"><span><b>Inscrições abertas no site.</b> Desmarque para fechar o formulário.</span></label>
+    <label class="check"><input type="checkbox" id="setSelf"><span><b>Entrada pelo celular liberada.</b> Ligue só no dia do acampamento: quem está confirmado destaca o voucher no próprio celular e a presença é registrada na hora. Desligado, a entrada continua sendo só pelo painel.</span></label>
+    <p class="err" id="setErr" role="alert"></p>
+    <div class="dlg-foot"><button class="btn btn-w" type="button" data-close>Cancelar</button><button class="btn btn-o" type="submit">Salvar</button></div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<section id="printSheet" class="print-sheet" aria-hidden="true"></section>
+
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+jsQR 1.4.0 (Cosmo Wolfe) - Apache License 2.0 - https://github.com/cozmo/jsQR
+Leitor de QR Code usado pela camera do painel quando o navegador nao tem leitor proprio.
+Arquivo copiado sem alteracoes de node_modules/jsqr/dist/jsQR.js; a licenca esta em jsqr-LICENSE.txt.

@@ -1,0 +1,12 @@
+{
+  "name": "conectacamp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site e painel de inscrições do CONECTAcamp (acampamento jovem da CONECTA)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

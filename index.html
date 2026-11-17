@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CONECTAcamp — Acampamento Jovem · 1ª edição 2027</title>
+<meta name="description" content="CONECTAcamp, a primeira edição do acampamento jovem da CONECTA. Para jovens de 15 a 25 anos. 100 vagas. Conexão que continua.">
+<meta name="theme-color" content="#1D4ED8">
+<meta property="og:title" content="CONECTAcamp — 1ª edição 2027">
+<meta property="og:description" content="Acampamento jovem da CONECTA. 100 vagas. Conexão que continua.">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/voucher.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- Ícones (sprite) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-tent" viewBox="0 0 24 24"><path d="M3.5 21 14 3"/><path d="M20.5 21 10 3"/><path d="M15.5 21 12 15l-3.5 6"/><path d="M2 21h20"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#topo" aria-label="CONECTAcamp — início">
+    <svg class="brand-mark" viewBox="0 0 40 32" width="38" height="30" aria-hidden="true"><path d="M6 24h10l6-10h12" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="24" r="4.4" fill="currentColor"/><circle cx="34" cy="14" r="4.4" fill="currentColor"/></svg>
+    <span>CONECTA<b>camp</b></span>
+  </a>
+  <button class="burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+  <nav id="menu" aria-label="Principal">
+    <a href="#sobre">O acampamento</a>
+    <a href="#programacao">Programação</a>
+    <a href="#local">Local</a>
+    <a href="#faq">Dúvidas</a>
+    <a class="my-link" href="#minha-inscricao" data-my>Minha inscrição</a>
+    <a class="pill-btn" href="#inscricao">Inscrição</a>
+  </nav>
+</header>
+
+<main id="conteudo">
+
+  <!-- HERO -->
+  <section class="hero" id="topo">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="kinetic">
+        <div class="krow"><span>1ª EDIÇÃO ✦ CONECTA ✦ 1ª EDIÇÃO ✦ CONECTA ✦ 1ª EDIÇÃO ✦ CONECTA ✦ </span><span>1ª EDIÇÃO ✦ CONECTA ✦ 1ª EDIÇÃO ✦ CONECTA ✦ 1ª EDIÇÃO ✦ CONECTA ✦ </span></div>
+        <div class="krow rev"><span>CONECTA ✦ CAMP ✦ CONECTA ✦ CAMP ✦ CONECTA ✦ CAMP ✦ </span><span>CONECTA ✦ CAMP ✦ CONECTA ✦ CAMP ✦ CONECTA ✦ CAMP ✦ </span></div>
+      </div>
+      <span class="fx f1">✦</span><span class="fx f2">+</span><span class="fx f3">✦</span><span class="fx f4">+</span><span class="fx f5">✦</span>
+    </div>
+
+    <div class="hero-inner">
+      <img class="hero-logo" src="img/logo-conecta.png" alt="Logo da CONECTA" width="347" height="474">
+      <p class="edition">★ Primeira edição · 2027 ★</p>
+      <h1 class="title" aria-label="CONECTAcamp">
+        <span class="t1" aria-hidden="true"><i style="--i:0">C</i><i style="--i:1">O</i><i style="--i:2">N</i><i style="--i:3">E</i><i style="--i:4">C</i><i style="--i:5">T</i><i style="--i:6">A</i></span>
+        <span class="t2" aria-hidden="true">camp</span>
+      </h1>
+
+      <div class="poster">
+        <span class="sticker">1ª edição</span>
+        <p class="poster-date" data-bind="heroDate">Data a definir</p>
+        <p class="poster-vagas"><b class="count" data-bind="spotsLeft">100</b><span id="posterUnit">vagas</span></p>
+        <a href="#inscricao" id="heroCta" class="btn btn-hot btn-block btn-lg"><span class="lbl">Quero participar</span> <span class="go" aria-hidden="true">→</span></a>
+        <button type="button" class="poster-my" data-my>Já me inscrevi · ver meu voucher</button>
+      </div>
+
+      <div class="cd-wrap" id="countdown" aria-label="Contagem regressiva para o acampamento" hidden>
+        <p class="cd-label">O acampamento começa em</p>
+        <div class="countdown">
+          <div><b data-u="d">00</b><span>dias</span></div>
+          <div><b data-u="h">00</b><span>horas</span></div>
+          <div><b data-u="m">00</b><span>min</span></div>
+          <div><b data-u="s">00</b><span>seg</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Faixas que se cruzam -->
+  <div class="bands" aria-hidden="true">
+    <div class="band b2"><div class="track rev">
+      <span>CONEXÃO QUE CONTINUA</span><em>✦</em><span><b data-bind="spotsLeft">100</b> VAGAS</span><em>✦</em><span>CONEXÃO QUE CONTINUA</span><em>✦</em><span><b data-bind="spotsLeft">100</b> VAGAS</span><em>✦</em><span>CONEXÃO QUE CONTINUA</span><em>✦</em><span><b data-bind="spotsLeft">100</b> VAGAS</span><em>✦</em><span>CONEXÃO QUE CONTINUA</span><em>✦</em><span><b data-bind="spotsLeft">100</b> VAGAS</span><em>✦</em>
+    </div></div>
+    <div class="band b1"><div class="track">
+      <span>PRIMEIRA EDIÇÃO</span><em>✦</em><span>CONECTAcamp</span><em>✦</em><span>2027</span><em>✦</em><span>PRIMEIRA EDIÇÃO</span><em>✦</em><span>CONECTAcamp</span><em>✦</em><span>2027</span><em>✦</em><span>PRIMEIRA EDIÇÃO</span><em>✦</em><span>CONECTAcamp</span><em>✦</em><span>2027</span><em>✦</em><span>PRIMEIRA EDIÇÃO</span><em>✦</em><span>CONECTAcamp</span><em>✦</em><span>2027</span><em>✦</em>
+    </div></div>
+  </div>
+
+  <!-- O ACAMPAMENTO -->
+  <section id="sobre" class="sec s-ice dots">
+    <div class="wrap about">
+      <div class="about-text">
+        <p class="tag reveal">O acampamento</p>
+        <h2 class="reveal">Um acampamento para <em>se conectar</em></h2>
+        <p class="lead reveal">O CONECTAcamp é o acampamento jovem cristão da CONECTA, para quem tem de <span data-bind="ageRange">15 a 25</span> anos. São dias para desacelerar, escutar, criar vínculos de verdade e viver a fé em comunidade, com relações que continuam depois que o acampamento termina.</p>
+        <a class="btn btn-hot" href="#inscricao">Garantir minha vaga <span class="go" aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="ticket-wrap reveal r">
+        <article class="ticket">
+          <div class="tk-main">
+            <p class="tk-top">Voucher · Acampamento Jovem</p>
+            <p class="tk-name">CONECTA<span>camp</span></p>
+            <p class="tk-tag">1ª edição · 2027</p>
+            <p class="tk-foot">Conexão que continua.</p>
+          </div>
+          <div class="tk-stub">
+            <span class="tk-vagas"><b class="count" data-bind="spotsLeft">100</b><small>vagas</small></span>
+            <span class="tk-bar" aria-hidden="true"></span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMAÇÃO -->
+  <section id="programacao" class="sec s-warm stripes">
+    <div class="wrap">
+      <p class="tag reveal">Programação</p>
+      <h2 class="reveal">Dias para <em>se conectar</em></h2>
+      <p class="lead reveal" id="progLead">A programação ainda está sendo preparada e será divulgada em breve.</p>
+
+      <div class="waitcard-wrap reveal" id="progWait">
+        <div class="wc-stack">
+          <span class="wc-b1" aria-hidden="true"></span><span class="wc-b2" aria-hidden="true"></span>
+          <div class="waitcard">
+            <span class="tape" aria-hidden="true"></span>
+            <div class="w-ico" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-tent"/></svg></div>
+            <h3>Aguarde!</h3>
+            <p class="w-big">A programação sai em breve.</p>
+            <p class="w-small">Data, local e horários serão divulgados nos nossos canais. Fique de olho!</p>
+            <span class="w-tag">Em breve</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel reveal" id="progCarousel" hidden>
+        <div class="car-head">
+          <p class="hint">Deslize para ver os outros dias</p>
+          <div class="arrows"><button type="button" class="arr" id="prevDay" aria-label="Dia anterior">←</button><button type="button" class="arr" id="nextDay" aria-label="Próximo dia">→</button></div>
+        </div>
+        <div class="days" id="progList" tabindex="0" aria-label="Programação por dia"></div>
+        <div class="dotnav" id="dayDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMA -->
+  <section class="sec s-blue stripes">
+    <div class="wrap narrow center">
+      <p class="tag reveal">Versículo base</p>
+      <blockquote class="verse reveal">
+        <p>“Porque onde estiverem dois ou três reunidos <em>em meu nome</em>, ali eu estou no meio deles.”</p>
+        <cite>Mateus 18:20</cite>
+      </blockquote>
+      <p class="lead reveal">Em um mundo cheio de telas, a conexão que mais importa é a que acontece cara a cara.</p>
+    </div>
+  </section>
+
+  <!-- LOCAL -->
+  <section id="local" class="sec s-ice dots">
+    <div class="wrap">
+      <p class="tag reveal">Local</p>
+      <h2 class="reveal">Onde vai <em>acontecer</em></h2>
+      <div class="local-grid">
+        <div class="local-info reveal">
+          <h3 data-bind="placeName">Local a definir</h3>
+          <p class="local-city" hidden><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg><span data-bind="placeCity"></span></p>
+          <p data-bind="placeAddress">O local e o endereço serão divulgados em breve.</p>
+          <ul class="checks">
+            <li>Espaço para louvor, mensagens e atividades</li>
+            <li>Equipe de apoio durante todo o acampamento</li>
+            <li>Informações sobre alimentação serão divulgadas em breve</li>
+          </ul>
+          <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener" hidden>Abrir no mapa ↗</a>
+        </div>
+        <div class="gallery reveal r" id="localMedia">
+          <div class="map-card" aria-hidden="true">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+              <g fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.5">
+                <ellipse cx="200" cy="150" rx="40" ry="24"/><ellipse cx="200" cy="150" rx="75" ry="46"/><ellipse cx="200" cy="150" rx="110" ry="68"/>
+                <ellipse cx="200" cy="150" rx="145" ry="90"/><ellipse cx="200" cy="150" rx="180" ry="112"/><ellipse cx="200" cy="150" rx="215" ry="134"/>
+              </g>
+              <path class="route" d="M70 230 160 170 250 190 330 90" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="7 8" stroke-linecap="round"/>
+              <circle cx="70" cy="230" r="8" fill="#fff"/><circle cx="160" cy="170" r="6" fill="#fff"/><circle cx="250" cy="190" r="6" fill="#9DB8FF"/>
+              <circle cx="330" cy="90" r="13" fill="#FF6A1F" stroke="#090B12" stroke-width="3"/>
+            </svg>
+            <span class="map-label">Como chegar</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stay reveal">
+        <span class="ibox"><svg class="ico" aria-hidden="true"><use href="#i-bed"/></svg></span>
+        <div><h3>Hospedagem em dormitório</h3><p>Traga roupa de cama, toalha e itens de higiene.</p></div>
+        <span class="stay-tag"><b data-bind="spots">100</b> vagas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSCRIÇÃO -->
+  <section id="inscricao" class="sec s-warm stripes">
+    <div class="wrap">
+      <p class="tag reveal">Inscrição</p>
+      <h2 class="reveal">Vem viver isso com a <em>gente.</em></h2>
+      <p class="lead reveal">Preencha os dados abaixo. Você pode adicionar outros participantes na mesma inscrição. São <span data-bind="spots">100</span> vagas para o público geral.</p>
+
+      <div class="vbox reveal" id="vagasBox" hidden>
+        <p class="vtext" id="vText" role="status"></p>
+        <div class="vtrack" aria-hidden="true"><i id="vFill"></i></div>
+      </div>
+      <div class="notice" id="soldout" hidden><strong>Vagas esgotadas.</strong> Todas as vagas foram preenchidas. Fale com a organização pelo WhatsApp para saber sobre lista de espera.</div>
+      <div class="notice" id="closed" hidden><strong>Inscrições fechadas no momento.</strong> Fique de olho nos nossos canais para saber quando reabrir.</div>
+
+      <div class="steps reveal">
+        <div><b>1</b><span>Faça o pré-cadastro</span></div>
+        <div><b>2</b><span>Envie pelo WhatsApp e combine o pagamento</span></div>
+        <div><b>3</b><span>Sua inscrição é confirmada</span></div>
+      </div>
+
+      <div class="prices reveal">
+        <h3>Valores da inscrição</h3>
+        <div class="price-grid" id="priceBox"></div>
+        <ul class="rules">
+          <li><b>Valor fixo:</b> <span data-bind="price">R$ 150,00</span> por pessoa.</li>
+          <li><b>Pagamento:</b> combinado com a organização pelo WhatsApp depois do pré-cadastro.</li>
+          <li><b>Faixa etária:</b> de <span data-bind="ageRange">15 a 25</span> anos. Menores de 18 anos precisam do responsável ou de autorização assinada.</li>
+          <li><b>Hospedagem:</b> em dormitórios.</li>
+        </ul>
+      </div>
+
+      <div class="notice reveal">
+        <strong>Como funciona:</strong> ao enviar o formulário você faz um <b>pré-cadastro</b>. A inscrição só é <b>confirmada após o pagamento</b>.
+      </div>
+
+      <form id="regForm" class="reg reveal" novalidate>
+        <input id="hp" class="hp" type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div id="people"></div>
+        <button type="button" class="btn btn-ghost add" id="addPerson">+ Adicionar participante</button>
+
+        <div class="minorbox" id="minorBox" hidden>
+          <h4>Menores de idade</h4>
+          <div class="field">
+            <label for="accompanied">Os menores vão acompanhados de pai, mãe ou responsável legal durante todo o acampamento?</label>
+            <select id="accompanied">
+              <option value="">Selecione</option>
+              <option value="sim">Sim, com o responsável</option>
+              <option value="nao">Não, sem o responsável</option>
+            </select>
+            <p class="err" id="accErr" role="alert"></p>
+          </div>
+          <div class="authbox" id="authBox" hidden>
+            <p><b>Autorização dos responsáveis:</b> menores que não estiverem com o responsável legal precisam levar a <b>autorização assinada</b> por pai, mãe ou responsável. O documento será conferido na chegada. A organização envia o modelo pelo WhatsApp.</p>
+            <label class="check"><input type="checkbox" id="authAck"><span>Estou ciente de que devo levar a autorização assinada.</span></label>
+            <p class="err" id="authErr" role="alert"></p>
+          </div>
+        </div>
+
+        <fieldset class="payplan">
+          <legend>Forma de pagamento</legend>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="payPlan" value="pix"><span><b>Pix</b><small>Um único pagamento</small></span></label>
+            <label class="choice"><input type="radio" name="payPlan" value="cartao"><span><b>Cartão de crédito</b><small>Um único pagamento</small></span></label>
+            <label class="choice"><input type="radio" name="payPlan" value="crediario"><span><b>Crediário</b><small>Parcelado, combinado com a organização</small></span></label>
+          </div>
+          <p class="err" id="planErr" role="alert"></p>
+        </fieldset>
+        <p class="note"><b>Pagamento:</b> depois de enviar o pré-cadastro, a organização combina com você os detalhes pelo WhatsApp.</p>
+
+        <div class="summary" id="summary" aria-live="polite"></div>
+
+        <label class="check"><input type="checkbox" id="agree"><span>Confirmo que os dados estão corretos e que a inscrição só será confirmada após o pagamento. Autorizo o uso dos dados apenas para a organização do acampamento.</span></label>
+        <label class="check"><input type="checkbox" id="imgAck"><span><b>Autorização de imagem:</b> autorizo o uso de imagem e voz dos participantes desta inscrição em fotos e vídeos do acampamento, para registro e divulgação pela organização. Para menores, autorizo como responsável legal.</span></label>
+        <p class="err" id="regErr" role="alert"></p>
+        <button class="btn btn-hot btn-lg submit" type="submit">Enviar pré-cadastro</button>
+      </form>
+
+      <div class="success" id="success" hidden tabindex="-1">
+        <div class="check-badge"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg></div>
+        <h3 id="okTitle">Pré-cadastro pronto!</h3>
+        <p>Seu protocolo é <b id="protocol"></b>.</p>
+        <p id="okText">Envie a mensagem abaixo para a organização para garantir sua vaga.</p>
+        <pre id="msgPreview" class="msg-preview"></pre>
+        <div class="success-actions">
+          <a class="btn btn-hot" id="waSend" href="#" target="_blank" rel="noopener" hidden>Enviar pelo WhatsApp</a>
+          <button class="btn btn-ghost" type="button" id="copyMsg">Copiar mensagem</button>
+          <button class="btn btn-ghost" type="button" id="newReg">Novo pré-cadastro</button>
+        </div>
+        <p class="muted" id="copyNote" role="status"></p>
+        <p class="muted">A inscrição será <b>confirmada após o pagamento</b>.</p>
+        <div class="success-my" id="successMy" hidden>
+          <p><b>Acompanhe sua inscrição:</b> com o CPF ou o protocolo você vê o status e o seu voucher (pré-cadastro ou confirmado).</p>
+          <button class="btn" type="button" id="successMyBtn" data-my>Ver meu voucher</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="sec s-ice dots">
+    <div class="wrap narrow">
+      <p class="tag reveal">Dúvidas</p>
+      <h2 class="reveal">Perguntas frequentes</h2>
+      <div class="faq reveal">
+        <details open><summary>Quem pode participar?</summary><p>Jovens de <span data-bind="ageRange">15 a 25</span> anos. Quem tem menos de 18 anos deve estar com o responsável ou levar autorização assinada.</p></details>
+        <details><summary>Quando e onde vai acontecer?</summary><p>A data e o local ainda estão sendo definidos. Vamos divulgar assim que forem confirmados. Será a primeira edição, em 2027.</p></details>
+        <details><summary>Quantas vagas existem?</summary><p>São <span data-bind="spots">100</span> vagas para o público geral. A vaga é garantida após o pagamento.</p></details>
+        <details><summary>Quanto custa?</summary><p>A inscrição custa <span data-bind="price">R$ 150,00</span> por pessoa, valor fixo.</p></details>
+        <details><summary>Quando a inscrição é confirmada?</summary><p>Depois do pagamento. O envio do formulário gera apenas um pré-cadastro.</p></details>
+        <details><summary>Posso inscrever mais de uma pessoa?</summary><p>Sim. No formulário, use “Adicionar participante”. Cada pessoa preenche seus dados e o pagamento é único.</p></details>
+        <details><summary>Como funciona o pagamento?</summary><p>Depois do pré-cadastro, a organização combina com você a forma de pagamento pelo WhatsApp.</p></details>
+        <details><summary>O que levar?</summary><p>Bíblia, itens de higiene, roupa de cama e toalha (a hospedagem é em dormitório), agasalho e garrafa de água. A lista completa será divulgada nos nossos canais.</p></details>
+      </div>
+      <p class="center-cta reveal"><a class="btn" id="waContact" href="#" target="_blank" rel="noopener" hidden>Ainda com dúvida? Chame no WhatsApp</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <img class="foot-logo" src="img/logo-conecta.png" alt="Logo da CONECTA" width="347" height="474" loading="lazy">
+    <p class="foot-edition">★ Primeira edição · 2027 ★</p>
+    <p class="foot-title" aria-label="CONECTAcamp">CONECTA<span>camp</span></p>
+    <p class="sign">CONEXÃO QUE CONTINUA.</p>
+    <p>Acampamento Jovem · <span data-bind="dates">Data a definir · 2027</span></p>
+    <p class="muted">Organização: CONECTA</p>
+    <p class="foot-contact">
+      <a href="#minha-inscricao" data-my>Minha inscrição</a>
+      <a id="footWa" href="#" target="_blank" rel="noopener" hidden>WhatsApp <span data-bind="whatsappLabel"></span></a>
+      <a id="footIg" href="#" target="_blank" rel="noopener" hidden>Instagram</a>
+      <a id="footMail" href="#" hidden>E-mail</a>
+    </p>
+  </div>
+</footer>
+
+<a class="btn btn-hot sticky-cta" id="stickyCta" href="#inscricao">Quero participar</a>
+
+<!-- MINHA INSCRIÇÃO / VOUCHER -->
+<dialog id="dlgMy" class="my-dlg" aria-labelledby="myTitle">
+  <div class="my-in">
+    <button class="my-x" type="button" id="myClose" aria-label="Fechar">×</button>
+
+    <div id="myLookup">
+      <p class="tag">Minha inscrição</p>
+      <h2 id="myTitle">Veja seu <em>voucher</em></h2>
+      <p class="my-lead">Digite o <b>CPF</b> do participante ou o <b>código da inscrição</b> para ver se você está só no pré-cadastro ou já confirmado. O voucher é um por pessoa e é com ele que você entra no acampamento.</p>
+      <form id="myForm" novalidate>
+        <label for="myQ">CPF ou código da inscrição</label>
+        <input id="myQ" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40" placeholder="000.000.000-00 ou CC-XXXXXX">
+        <p class="err" id="myErr" role="alert"></p>
+        <button class="btn btn-hot btn-block btn-lg" type="submit" id="myGo"><span>Ver meu voucher</span> <span class="go" aria-hidden="true">→</span></button>
+      </form>
+      <p class="my-fine">O código é o protocolo (ex.: <b>CC-AB12CD</b>) que você recebeu ao se inscrever, ou o código do voucher (ex.: <b>CCV-AB12-CD34</b>). Por segurança, telefone e dados de saúde nunca aparecem aqui.</p>
+    </div>
+
+    <div id="myResult" hidden></div>
+  </div>
+</dialog>
+
+<script src="js/content.js"></script>
+<script src="js/qr.js"></script>
+<script src="js/main.js"></script>
+<script src="js/voucher.js"></script>
+</body>
+</html>
